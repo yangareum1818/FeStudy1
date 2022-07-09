@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 
 import Router from "./router";
 import { SERVER_PORT } from "@constants/port";
@@ -9,6 +10,7 @@ function callbackOnExpressServerRunning() {
 
 const server = express();
 
+server.use(cors())
 server.use("/api", Router);
 
 server.listen(SERVER_PORT, callbackOnExpressServerRunning);

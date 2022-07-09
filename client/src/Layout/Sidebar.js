@@ -1,4 +1,6 @@
+import React, { useState } from 'react';
 import styled from "styled-components";
+import axios from 'axios';
 
 const SidebarWrapper = styled.div`
   @media (min-width: 960px) {
@@ -13,16 +15,29 @@ const SidebarWrapper = styled.div`
 `;
 
 function SideBar() {
-  const listOfItems = ['내 강의 보기', '내 숏북 보기', '수강 신청 내역', '거래 내역', '쿠폰 내역', '회원 정보 수정', '기기 관리', '로그아웃']
+  const [userName, setUserName] = useState();
+  const listOfItems2 = [
+    {
+      href: 'https://www.naver.com',
+      name: '내 강의 보기'
+    },
+    {
+      href: 'https://www.daum.net',
+      name: '내 숏북 보기'
+    }
+  ]
+  axios.get("http://localhost:8000/api/v1/user/my").then(res => {
+    setUserName(res.data[0].name)
+  })
   return (
     <SidebarWrapper>
-        <h3>안녕하세요, 님</h3>
+        <h3 className="name-section">안녕하세요, {userName}님</h3>
         <p>사용 가능 쿠폰 
-          <a href=""></a>
+          <a href="https://www.naver.com"></a>
         </p>
         <ul>
-      {listOfItems.map((item) => (
-          <li><a> {item} </a></li>
+      {listOfItems2.map((item) => (
+          <li><a href={item.href}> {item.name} </a></li>
       ))}
         </ul>
     </SidebarWrapper>
