@@ -1,20 +1,14 @@
-function Course() {
+function TabItems() {
+  const items = ['전체 목록', '수강 예정', '수강중', '수강 완료'];
   return (
     <div className="me_panel">
       <ul className="me_panel_cell">
-        <li><a>전체 목록</a></li>
-        <li><a>수강 예정</a></li>
-        <li><a>수강중</a></li>
-        <li><a>수강 완료</a></li>
+        {items.map((item) => (
+          <li><a>{item}</a></li>
+        ))}
       </ul>
     </div>
-
-    // <div className="me_course">
-    //   <div className="me_course_box">
-    //     <a></a>
-    //   </div>
-    // </div>
   );
 }
 
-export default Course
+export default TabItems

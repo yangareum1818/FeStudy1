@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import Course from './MyContant/Course';
 
-const Contant_Ir = styled.div`
+const ContentContainer = styled.div`
   padding: 0 1rem;
   width: 100%;
   min-height: 300px;
@@ -11,9 +12,9 @@ const Contant_Ir = styled.div`
 
 function Contant({ children }) {
   return (
-    <Contant_Ir>
-      Section
-    </Contant_Ir>
+    <ContentContainer>
+      <Course />
+    </ContentContainer>
   );
 }
 

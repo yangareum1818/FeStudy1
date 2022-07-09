@@ -11,21 +11,9 @@ export const GlobalStyle = createGlobalStyle `
   }
 `;
 
-const Container = styled.div`
-  @media (min-width: 960px) {
-    margin: 0 auto;
-    padding: 0 6.1224489796%;
-    max-width: 980px;
-    min-height: 100vh;
-  }
-
-  padding: 0 1.6rem;
-`;
-
 const SectionFlex = styled.section`
   @media (min-width: 960px) {
     margin: 0 -1rem;
-    flex-direction: row;
   }
 
   display: flex;
@@ -38,12 +26,10 @@ function App() {
     <div className="App">
       <Header/>
       <Main>
-        <Container>
           <SectionFlex>
             <Sidebar />
             <Contant />
           </SectionFlex>
-        </Container>
       </Main>
     </div>
   );
