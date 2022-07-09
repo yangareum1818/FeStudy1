@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import styled, { createGlobalStyle } from "styled-components";
 import Sidebar from './Layout/Sidebar';
 import Header from './Layout/Header';

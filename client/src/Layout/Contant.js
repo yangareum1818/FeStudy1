@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Course from './MyContant/Course';
+import Course from '../MyContant/Course';
 
 const ContentContainer = styled.div`
   padding: 0 1rem;
