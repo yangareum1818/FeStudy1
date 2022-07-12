@@ -4,7 +4,7 @@ import Header from './Layout/Header';
 import Main from './Layout/Main';
 import Contant from './Layout/Contant';
 
-export const GlobalStyle = createGlobalStyle `
+export const GlobalStyle = createGlobalStyle`
   body {
     background-color: #eee;
   }
@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle `
 
 const SectionFlex = styled.section`
   @media (min-width: 960px) {
-    margin: 0 -1rem;
+    margin: 0 -10px;
   }
 
   display: flex;
