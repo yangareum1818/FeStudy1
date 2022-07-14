@@ -10,7 +10,9 @@
       "@constants/*": ["./src/constants/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@api/*": ["./src/api/*"],
-      "@mocks/*": ["./src/mocks/*"]
+      "@mocks/*": ["./src/mocks/*"],
+      "@repository/*": ["./src/db/repository/*"],
+      "@dto/*": ["./src/db/dto/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
