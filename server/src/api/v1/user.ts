@@ -1,7 +1,6 @@
 import express from "express";
 
 import dbClient from "db/db";
-import getMyUserAPIMockData from "@mocks/getMyInfoAPIMockData";
 
 import type { Request, Response } from "express";
 
