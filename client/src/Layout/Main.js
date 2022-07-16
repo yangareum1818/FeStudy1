@@ -8,15 +8,15 @@ const Container = styled.div`
     min-height: 100vh;
   }
 
-  padding: 0 1.6rem;
+  padding: 0 16px;
 `;
 
 const MainInterval = styled.main`
   @media (min-width: 960px) {
-    margin-top: 8rem;
+    margin-top: 80px;
   }
 
-  margin-top: 4rem;
+  margin-top: 40px;
 `;
 
 function Main({ children }) {
