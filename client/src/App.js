@@ -1,14 +1,8 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import Sidebar from './Layout/Sidebar';
 import Header from './Layout/Header';
 import Main from './Layout/Main';
-import Contant from './Layout/Contant';
-
-export const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: #eee;
-  }
-`;
+import ContentLayout from './Layout/ContentLayout';
 
 const SectionFlex = styled.section`
   @media (min-width: 960px) {
@@ -27,7 +21,7 @@ function App() {
       <Main>
           <SectionFlex>
             <Sidebar />
-            <Contant />
+            <ContentLayout />
           </SectionFlex>
       </Main>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const SidebarWrapper = styled.nav`
   @media (min-width: 960px) {
@@ -51,7 +52,8 @@ const NavListItem = styled.a`
 `;
 
 function SideBar() {
-  const [userName, setUserName] = useState();
+  const [userName, setUserName] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navList = [
     {
       href: 'https://www.naver.com',
@@ -87,16 +89,18 @@ function SideBar() {
     }
   ];
 
-  axios.get("http://localhost:8000/api/v1/user/my").then(res => {
-    setUserName(res.data[0].name)
-  });
-  
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/v1/user/my").then(res => {
+      setUserName(res.data[0].name)
+      setLoading(false);
+    });  
+  }, [])
+
   return (
     <SidebarWrapper>
-        <NameSidebar>안녕하세요, {userName}님 !</NameSidebar>
+        <NameSidebar>안녕하세요, {loading ? 'Loading...' : userName}님 !</NameSidebar>
         <AvailableSidebarSub>사용 가능 쿠폰 
           <SidebarCouponCount href="https://www.naver.com">2
-            {/* {CourseMockData.mockData.length} */}
           </SidebarCouponCount>
         </AvailableSidebarSub>
         <NavListWraaper className='navlist-wrapper'>
