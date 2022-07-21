@@ -8,7 +8,7 @@ export class UserRepository {
     return this.knex("user").select("*");
   }
 
-  async getUser(userId: string): Promise<UserDTO[]> {
-    return this.knex("user").select("*").where({ id: userId });
+  async getUserByEmail(email: string): Promise<UserDTO[]> {
+    return this.knex("user").select("*").where({ email: email });
   }
 }

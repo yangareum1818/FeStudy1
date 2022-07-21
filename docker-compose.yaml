@@ -10,7 +10,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: festudy
-      MYSQL_USER: festudy
-      MYSQL_PASSWORD: dev
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     volumes:
       - ./db_data:/var/lib/mysql
