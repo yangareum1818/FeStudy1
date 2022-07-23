@@ -12,7 +12,8 @@
       "@api/*": ["./src/api/*"],
       "@mocks/*": ["./src/mocks/*"],
       "@repository/*": ["./src/db/repository/*"],
-      "@dto/*": ["./src/db/dto/*"]
+      "@dto/*": ["./src/db/dto/*"],
+      "@auth/*": ["./src/auth/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

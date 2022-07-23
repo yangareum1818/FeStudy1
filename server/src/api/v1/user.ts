@@ -1,24 +1,23 @@
 import express from "express";
 
-import dbClient from "db/db";
-
 import type { Request, Response } from "express";
 
 const userRouter = express.Router();
 
 async function getMyInfoHandler(req: Request, res: Response) {
-  const userEmail = req.body.email;
-  const result = await dbClient.user.getUserByEmail(userEmail);
-  return res.json(result);
-}
-
-async function loginHandler(req: Request, res: Response) {
-  const userEmail = req.body.email;
-  const password = req.body.password;
-  return res.json();
+  // @ts-ignore
+  if (!req.isAuthenticated()) {
+    return res.json({
+      status: 401,
+      message: "인증되지 않았습니다.",
+    });
+  }
+  return res.json({
+    data: req.user,
+    status: 200,
+  });
 }
 
 userRouter.post("/my", getMyInfoHandler);
-userRouter.post("/login", loginHandler);
 
 export default userRouter;
