@@ -37,8 +37,8 @@ server.use(
 );
 
 server.use(cookieParser());
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
 // for login session
 server.use(
@@ -78,7 +78,7 @@ passport.use(
 // login이 최초로 성공했을 때만 호출되는 함수
 passport.serializeUser(function (user: any, done) {
   // @ts-ignore
-  return done(null, user.user__email);
+  return done(null, user.email);
 });
 
 // 사용자가 페이지를 방문할 때마다 호출되는 함수
