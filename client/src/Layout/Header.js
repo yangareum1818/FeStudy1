@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
 const Head = styled.header`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 129px;
-  text-align: center;
+  height: 12rem;
   font-size: 3.2rem;
   font-weight: 700;
-  line-height: 2.2;
-  border-bottom: 1px solid #eee;
+  border-bottom: .1rem solid #eee;
 `;
 
 function Header() {
   return (
     <Head>
-      Header
+      HEADER
     </Head>
   );
 }

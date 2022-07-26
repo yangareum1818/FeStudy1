@@ -21,9 +21,32 @@ code {
 }
 
 a {
+  color: #282828;
   text-decoration: none;
 }
 
 ul, li, ol, dl {
   list-style: none;
+}
+
+[type=text], [type=number], [type=tel], [type=file], [type=password], [type=email], [type=search], [type=url], textarea {
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 12rem;
+  height: 4rem;
+  padding: 0 1.6rem;
+  border: 0.1rem solid #d3d3d3;
+  border-radius: 0;
+  background: #fff;
+  font-size: 1.4rem;
+  color: #424242;
+  line-height: 4rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+[readonly=readonly], [disabled=disabled] {
+  background-color: rgba(204,206,210,.5);
+  color: #424242;
 }

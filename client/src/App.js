@@ -6,13 +6,14 @@ import ContentLayout from './Layout/ContentLayout';
 
 const SectionFlex = styled.section`
   @media (min-width: 960px) {
-    margin: 0 -10px;
+    margin: 0 -1rem;
   }
 
   display: flex;
   justify-content: center;
   align-items: flex-start;
 `;
+
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <SectionFlex>
             <Sidebar />
             <ContentLayout />
+            {/* <div> router component 1 </div> */}
           </SectionFlex>
       </Main>
     </div>
