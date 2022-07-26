@@ -14,13 +14,16 @@ const CouponsListBlock = styled.div`
 function Coupon() {
   const couponlist = useCouponList();
   
+  if (couponlist.isError) { 
+    return <div> Error </div>
+  }
   return (
     <>
       <CouponInputBar />
       <CouponsListBlock>
         {(!couponlist.loading && couponlist.mycoupon && !couponlist.isError) ? couponlist.mycoupon.map((coupon) => (
           <CouponItem article={coupon} />
-        )) : (<div>Loaing...</div>) | console.log(couponlist.isError)}
+        )) : (<div>Loaing...</div>)}
       </CouponsListBlock>
     </>
   );
