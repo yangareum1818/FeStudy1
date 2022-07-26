@@ -6,7 +6,13 @@ import type { Request, Response } from "express";
 const courseRouter = express.Router();
 
 function getCoursesInfoHandler(req: Request, res: Response) {
-  res.send(courseMockData);
+  if (!req.isAuthenticated()) {
+    return res.json({
+      status: 401,
+      message: "인증되지 않았습니다.",
+    });
+  }
+  return res.send(courseMockData);
 }
 
 courseRouter.get("/my", getCoursesInfoHandler);
