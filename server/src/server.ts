@@ -1,29 +1,20 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
-import mysqlSession from "express-mysql-session";
-import mysql2 from "mysql2/promise";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import gS from "passport-google-oauth2";
-import bodyParser from "body-parser";
 
 import Router from "./router";
 import { SERVER_PORT } from "@constants/port";
-import mysqlConnectionConfig from "@constants/mysqlConnectionConfig";
 import authRouter from "@auth/index";
 import dbClient from "db/db";
+
+import type { UserDTO } from "db/dto/user";
 
 function callbackOnExpressServerRunning() {
   console.log(`Server listening on >> http://localhost:${SERVER_PORT}`);
 }
-
-// @ts-ignore
-const MySQLStore = mysqlSession(session);
-
-// mysql session store 생성
-const connection = mysql2.createPool(mysqlConnectionConfig);
-const sessionStore = new MySQLStore({}, connection);
 
 const GoogleStrategy = gS.Strategy;
 
@@ -45,9 +36,8 @@ server.use(
   session({
     secret: process.env.SERVER_SESSION_SECRET_KEY as string,
     resave: true,
-    proxy: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000, secure: false, httpOnly: true },
+    cookie: { maxAge: 60 * 60 * 1000, secure: false, httpOnly: false },
   })
 );
 
@@ -69,8 +59,25 @@ passport.use(
     // @ts-ignore
     async function (request, accessToken, refreshToken, profile, done) {
       const user = await dbClient.user.getUserByEmail(profile.email);
-      // should unique user
-      return done(null, user[0]);
+      if (user.length) {
+        // should unique user
+        return done(null, user[0]);
+      }
+      if (!user.length) {
+        // OAuth 로그인 시 없던 계정인 경우
+        const data = {
+          name: profile.given_name,
+          email: profile.email,
+          address: null,
+          company: null,
+          organization: null,
+          provider: "google",
+        };
+        const newUser = await dbClient.user.createUser(
+          data as Omit<UserDTO, "ID" | "updated_at" | "created_at">
+        );
+        return done(null, newUser[0]);
+      }
     }
   )
 );

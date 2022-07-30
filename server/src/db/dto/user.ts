@@ -1,8 +1,15 @@
-import type { CourseDTO } from "./course";
+type Providers = "google" | "email";
 
 export type UserDTO = {
   id: string;
-  email: string | null;
-  name: string | null;
-  courses: CourseDTO;
+  email: string;
+  name: string;
+  phone: string;
+  email_certified: boolean;
+  address: string | null;
+  organization: string | null;
+  company: string | null;
+  provider: Providers | null;
+  created_at: string;
+  updated_at: string;
 };
