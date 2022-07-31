@@ -10,12 +10,12 @@ const CouponItemBox = styled.div`
     margin-top: 2rem;
   }
 
-  .coupon-item {
+  .coupon_item {
     font-size: 1.4rem;
     line-height: 2.4rem;
 
-    .coupon-title {
-      .title-days {
+    .coupon_title {
+      .title_days {
         strong {
           margin-right: .8rem;
           color: #ed234b;
@@ -33,17 +33,17 @@ const CouponItemBox = styled.div`
       }
     }
 
-    .coupon-sub-title {
+    .coupon_sub_title {
       margin-top: 2rem;
       padding-top: 2rem;
       font-size: 1.6rem;
       border-top: 1px solid #e3e3e3;
 
-      .sub-title-box {
+      .sub_title_box {
         display: flex;
         margin-top: 0.3rem;
 
-        .sub-title {
+        .sub_title {
           margin-right: .8rem;
         }
       }
@@ -56,19 +56,19 @@ function CouponItem(coupon) {
 
   return (
     <CouponItemBox>
-      <div className="coupon-item">
-        <div className="coupon-title">
-          <div className="title-days">
+      <div className="coupon_item">
+        <div className="coupon_title">
+          <div className="title_days">
             <strong>D - 5달</strong>
             <span>({showAt} ~ {hideAt})</span>
           </div>
           <p className="title">{title}</p>
         </div>
-        <div className="coupon-sub-title">
-          <p className="sub-title-discount">{discount}</p>
-          <div className="sub-title-box">
-            <p className="sub-title">적용대상 : </p>
-            <p className="sub-cont">{description}</p>
+        <div className="coupon_sub_title">
+          <p className="sub_title_discount">{discount}</p>
+          <div className="sub_title_box">
+            <p className="sub_title">적용대상 : </p>
+            <p className="sub_cont">{description}</p>
           </div>
         </div>
       </div>

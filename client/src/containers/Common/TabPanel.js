@@ -30,7 +30,7 @@ const MePanelItem = styled.li`
     color:#fff;
   }
 
-  .me-panelitem-link {
+  .me_panelitem_link {
     @media (min-width: 720px) {
       font-size: 1.4rem;
       padding-right: 1.2rem;
@@ -59,7 +59,7 @@ function TabItems() {
       <MePanelCell>
         {items.map((item) => (
           <MePanelItem>
-            <a className="me-panelitem-link">{item}</a>
+            <a className="me_panelitem_link">{item}</a>
           </MePanelItem>
         ))}
       </MePanelCell>

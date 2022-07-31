@@ -10,7 +10,7 @@ const CoureItemBox = styled.div`
     margin-top: 3rem;
   }
 
-  .coure-item {
+  .coure_item {
     @media (min-width: 960px) {
       margin: 0 2rem;
       padding: 2rem 0;
@@ -30,10 +30,10 @@ function CourseItem(info){
   
   return (
     <CoureItemBox>
-      <a href="#none" className="coure-item" target="_blank">
-        <span className="coure-item-info">{status}</span>
-        <div className="coure-item-title">{name}</div>
-        <p className="coure-item-period">{expired_at}</p>
+      <a href="#none" className="coure_item" target="_blank">
+        <span className="coure_item_info">{status}</span>
+        <div className="coure_item_title">{name}</div>
+        <p className="coure_item_period">{expired_at}</p>
       </a>
     </CoureItemBox>
   )

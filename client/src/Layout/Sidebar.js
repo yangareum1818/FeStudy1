@@ -41,7 +41,7 @@ const NavListWraaper = styled.ul`
   font-size: 1.6rem;
   border-top: .1rem solid #e6e8eb;
 
-  .list-item {
+  .list_item {
     display: block;
     padding: 2rem 0 1.9rem;
     color: #282828;
@@ -86,7 +86,7 @@ const navList = [
     value: 'coupon'
   },
   {
-    path: 'https://www.daum.net',
+    path: '/information',
     name: '회원 정보 수정',
     value: 'profile'
   },
@@ -106,7 +106,7 @@ function SideBar() {
   const username = useUserName();
   // console.log(username);
   const couponcount = useCouponList();
-  console.log(couponcount);
+  console.log(username);
 
   return (
     <SidebarWrapper>
@@ -114,12 +114,12 @@ function SideBar() {
         <AvailableSidebarSub>사용 가능 쿠폰&nbsp;
           <SidebarCouponCount href='/coupon-list'>{ couponcount.loading ? 'Loading!' : couponcount.mycoupon.length }</SidebarCouponCount>
         </AvailableSidebarSub>
-        <NavListWraaper className='navlist-wrapper'>
+        <NavListWraaper className='navlist_wrapper'>
           {navList.map((item, index) => (
             <li>
               <NavLink
                 key={ index}
-                className={({ isActive }) => isActive ? "list-item active" : "list-item"}
+                className={({ isActive }) => isActive ? "list_item active" : "list_item"}
                 to={item.path}
               >
                 {item.name}

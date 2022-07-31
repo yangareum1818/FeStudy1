@@ -6,8 +6,9 @@ export default function useUserName() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/v1/user/my").then(res => {
-      setUserName(res.data[0].name)
+    axios.post("http://localhost:8000/api/v1/user/my").then(res => {
+      console.log(res);
+      // setUserName(res.data[0].name)
       setLoading(false);
     });  
   }, [])

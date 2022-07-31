@@ -39,11 +39,30 @@ ul, li, ol, dl {
   border: 0.1rem solid #d3d3d3;
   border-radius: 0;
   background: #fff;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: #424242;
   line-height: 4rem;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+
+input[type=checkbox] {
+  display: inline-block;
+  width: 1.4rem;
+  height: 1.4rem;
+  cursor: pointer;
+  outline: 1px solid #6e6e73;
+  appearance: none;
+}
+
+input[type=checkbox]:checked {
+  background-color: #f00 !important;
+  /* display: inline-block;
+  width: 1.4rem;
+  height: 1.4rem;
+  cursor: pointer;
+  outline: 1px solid #6e6e73;
+  appearance: none; */
 }
 
 [readonly=readonly], [disabled=disabled] {

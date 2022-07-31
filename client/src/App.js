@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import Sidebar from './Layout/Sidebar';
 import Header from './Layout/Header';
 import Main from './Layout/Main';
@@ -14,18 +15,17 @@ const SectionFlex = styled.section`
   align-items: flex-start;
 `;
 
-
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Main>
-          <SectionFlex>
-            <Sidebar />
-            <ContentLayout />
-            {/* <div> router component 1 </div> */}
-          </SectionFlex>
-      </Main>
+        <Header />
+        <Main>
+            <SectionFlex>
+              <Sidebar />
+              <ContentLayout />
+              {/* <div> router component 1 </div> */}
+            </SectionFlex>
+        </Main>
     </div>
   );
 }

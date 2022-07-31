@@ -65,10 +65,10 @@ function CouponInput() {
     <CouponInputWrapper>
       <form>
         <CouponsInputBox>
-          <label htmlFor="test">
+          <label htmlFor="couponcode">
             쿠폰코드 입력
           </label>
-          <input id="test" type="text" placeholder="쿠폰 코드를 입력해주세요." />
+          <input id="couponcode" type="text" placeholder="쿠폰 코드를 입력해주세요." />
           <button type="submit" disabled="disabled" className="btn">쿠폰 등록</button>
         </CouponsInputBox>
       </form>

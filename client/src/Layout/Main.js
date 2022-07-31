@@ -4,8 +4,7 @@ const Container = styled.div`
   @media (min-width: 960px) {
     margin: 0 auto;
     padding: 0 6.12%;
-    max-width: 98rem;
-    min-height: 100vh;
+    max-width: 980px;
   }
 
   padding: 0 1.6rem;
@@ -17,6 +16,7 @@ const MainInterval = styled.main`
   }
 
   margin-top: 4rem;
+  min-height: 100vh;
 `;
 
 function Main({ children }) {
