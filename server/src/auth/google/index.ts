@@ -41,7 +41,7 @@ googleAuthRouter.get(
   }
 );
 
-googleAuthRouter.get("/fail", (req, res) => {
+googleAuthRouter.get("/login/fail", (req, res) => {
   return res.json({ message: "인증에 실패했습니다.", statue: res.statusCode });
 });
 
