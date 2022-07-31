@@ -6,6 +6,7 @@ import type { Request, Response } from "express";
 const courseRouter = express.Router();
 
 function getCoursesInfoHandler(req: Request, res: Response) {
+  // #swagger.tags = ['Courses']
   if (!req.isAuthenticated()) {
     return res.json({
       status: 401,

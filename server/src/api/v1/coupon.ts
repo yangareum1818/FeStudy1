@@ -6,6 +6,7 @@ import type { Request, Response } from "express";
 const couponsRouter = express.Router();
 
 function getCouponsInfoHandler(req: Request, res: Response) {
+  // #swagger.tags = ['Coupons']
   if (!req.isAuthenticated()) {
     return res.json({
       status: 401,

@@ -8,6 +8,7 @@ import type { UserDTO } from "db/dto/user";
 const userRouter = express.Router();
 
 async function getMyInfoHandler(req: Request, res: Response) {
+  // #swagger.tags = ['User']
   if (!req.isAuthenticated()) {
     return res.json({
       status: 401,
@@ -18,15 +19,16 @@ async function getMyInfoHandler(req: Request, res: Response) {
 }
 
 async function createUser(req: Request, res: Response) {
+  // #swagger.tags = ['User']
   const result = await dbClient.user.createUser({
     ...req.body,
   });
-  if (!req.isAuthenticated()) {
-    return res.json({
-      status: 401,
-      message: "인증되지 않았습니다.",
-    });
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res.json({
+  //     status: 401,
+  //     message: "인증되지 않았습니다.",
+  //   });
+  // }
   return res.json({
     message: "Success to create User",
     status: 200,
@@ -35,6 +37,7 @@ async function createUser(req: Request, res: Response) {
 }
 
 async function patchMyInfoHandler(req: Request, res: Response) {
+  // #swagger.tags = ['User']
   const user = req.user as UserDTO;
   // Edit userinfo
   if (!req.isAuthenticated()) {
