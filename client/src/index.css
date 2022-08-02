@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -56,13 +57,7 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]:checked {
-  background-color: #f00 !important;
-  /* display: inline-block;
-  width: 1.4rem;
-  height: 1.4rem;
-  cursor: pointer;
-  outline: 1px solid #6e6e73;
-  appearance: none; */
+  background-color: #6e6e73;
 }
 
 [readonly=readonly], [disabled=disabled] {

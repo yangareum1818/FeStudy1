@@ -14,9 +14,9 @@ function Course() {
     <>
       <TabPanel></TabPanel>
       <CouresListBlock>
-        {(!course.loading && course.mycourse) ? course.mycourse.map((info) => (
+        {/* {(!course.loading && course.mycourse) ? course.mycourse.map((info) => (
           <CourseItem article={info} />
-        )) : (<div> Loading ... </div>)}
+        )) : (<div> Loading.. </div>)} */}
       </CouresListBlock>
     </>
   );

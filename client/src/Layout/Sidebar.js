@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from 'react-router-dom'
 
@@ -110,7 +109,7 @@ function SideBar() {
 
   return (
     <SidebarWrapper>
-        <NameSidebar>안녕하세요, { username.loading ? 'Loading...' : username.userName}님 !</NameSidebar>
+        <NameSidebar>안녕하세요, { username.loading ? 'Loading..' : username.userName}님!</NameSidebar>
         <AvailableSidebarSub>사용 가능 쿠폰&nbsp;
           <SidebarCouponCount href='/coupon-list'>{ couponcount.loading ? 'Loading!' : couponcount.mycoupon.length }</SidebarCouponCount>
         </AvailableSidebarSub>

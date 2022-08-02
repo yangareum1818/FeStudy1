@@ -8,7 +8,9 @@ export default function useCourseList() {
 
   useEffect(() => {
     // useEffect는 DOM이 그려진다음에 돈다.
-    axios.get("http://localhost:8000/api/v1/courses/my").then(res => {
+    axios.get("http://localhost:8000/api/v1/courses/my", {
+      withCredentials: true
+    }).then(res => {
       // 데이터를 가져온 다음에 로딩상태를 false
       setLoading(false);
       setMycourse(res.data);
