@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API",
-    "description": "Description",
+    "title": "FastCampus API Docs",
+    "description": "FastCampus API 문서입니다.",
     "version": "1.0.0"
   },
   "host": "localhost:8000",
@@ -16,11 +16,23 @@
         "tags": [
           "User"
         ],
-        "description": "",
-        "parameters": [],
+        "description": "유저를 생성할 때 사용할 API Endpoint입니다.",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Patch User Data",
+            "schema": {
+              "$ref": "#/definitions/patchuser"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User successfully created.",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
           }
         }
       }
@@ -30,11 +42,14 @@
         "tags": [
           "User"
         ],
-        "description": "",
+        "description": "내 정보를 조회합니다(로그인 상태여야 함).",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User successfully created.",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
           }
         }
       },
@@ -42,27 +57,23 @@
         "tags": [
           "User"
         ],
-        "description": "",
+        "description": "유저를 수정할 때 사용할 API Endpoint입니다.",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Patch User Data",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "example": "any"
-                },
-                "data": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/patchuser"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User successfully edited.",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
           }
         }
       }
@@ -97,13 +108,34 @@
     },
     "/auth/google/login": {
       "get": {
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Auth"
+        ],
+        "description": "Google OAuth를 통해 로그인을 할 때 이동하는 Endpoint입니다.",
+        "parameters": [
+          {
+            "name": "querystring",
+            "description": "로그인 후 돌아올 URL",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "redirect_url": {
+                  "type": "string",
+                  "example": "http://localhost:3000"
+                }
+              }
+            },
+            "in": "query"
+          }
+        ],
         "responses": {}
       }
     },
     "/auth/google/login/callback": {
       "get": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "parameters": [
           {
@@ -121,6 +153,9 @@
     },
     "/auth/google/login/fail": {
       "get": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -132,9 +167,109 @@
     },
     "/auth/google/logout": {
       "get": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "parameters": [],
         "responses": {}
+      }
+    }
+  },
+  "definitions": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "e879e3721010fa0c365f59151c6c3c878461cdc0"
+        },
+        "email": {
+          "type": "string",
+          "example": "remigailard80@korea.ac.kr"
+        },
+        "name": {
+          "type": "string",
+          "example": "김민석[ 학부재학 / 보건환경융합과학부 ]"
+        },
+        "phone": {},
+        "email_certified": {
+          "type": "number",
+          "example": 0
+        },
+        "address": {},
+        "organization": {},
+        "company": {},
+        "provider": {
+          "type": "string",
+          "example": "email"
+        },
+        "created_at": {
+          "type": "string",
+          "example": "2022-07-31 02:56:29"
+        },
+        "updated_at": {
+          "type": "string",
+          "example": "2022-07-31 02:56:29"
+        }
+      }
+    },
+    "createuser": {
+      "type": "object",
+      "properties": {
+        "phone": {},
+        "provider": {
+          "type": "string",
+          "example": "email"
+        },
+        "name": {
+          "type": "string",
+          "example": "김민석[ 학부재학 / 보건환경융합과학부 ]"
+        },
+        "email": {
+          "type": "string",
+          "example": "remigailard80@korea.ac.kr"
+        },
+        "address": {},
+        "organization": {},
+        "company": {}
+      }
+    },
+    "patchuser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "e879e3721010fa0c365f59151c6c3c878461cdc0"
+        },
+        "phone": {
+          "type": "string",
+          "example": "01074616005"
+        },
+        "provider": {
+          "type": "string",
+          "example": "email"
+        },
+        "name": {
+          "type": "string",
+          "example": "안녕아녕"
+        },
+        "email": {
+          "type": "string",
+          "example": "remigailard801@naver.com"
+        },
+        "address": {
+          "type": "string",
+          "example": "경기도 성남시 수정구 ㅇㅇㅇ"
+        },
+        "organization": {
+          "type": "string",
+          "example": "Organization"
+        },
+        "company": {
+          "type": "string",
+          "example": "토양어선"
+        }
       }
     }
   }

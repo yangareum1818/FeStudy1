@@ -6,10 +6,18 @@ import type { Request, Response } from "express";
 const googleAuthRouter = express.Router();
 
 function handleGoogleLogout(req: Request, res: Response) {
+  /**
+   * #swagger.tags = ['Auth']
+   */
   return req.logout({}, (err) => "");
 }
 
 googleAuthRouter.get("/login", (req, res, next) => {
+  /**
+   * #swagger.tags = ['Auth']
+   * #swagger.description = "Google OAuth를 통해 로그인을 할 때 이동하는 Endpoint입니다."
+   * #swagger.parameters['querystring'] = { description: '로그인 후 돌아올 URL', schema: { redirect_url: 'http://localhost:3000' } }
+   */
   const authenticator = passport.authenticate("google", {
     scope: ["email", "profile"],
     state: JSON.stringify(req.query),
@@ -19,6 +27,9 @@ googleAuthRouter.get("/login", (req, res, next) => {
 });
 
 googleAuthRouter.get(
+  /**
+   * #swagger.tags = ['Auth']
+   */
   "/login/callback",
   passport.authenticate("google", {
     failureRedirect: "/auth/google/login/fail",
@@ -42,6 +53,9 @@ googleAuthRouter.get(
 );
 
 googleAuthRouter.get("/login/fail", (req, res) => {
+  /**
+   * #swagger.tags = ['Auth']
+   */
   return res.json({ message: "인증에 실패했습니다.", statue: res.statusCode });
 });
 
