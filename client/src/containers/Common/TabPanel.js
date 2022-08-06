@@ -18,32 +18,31 @@ const MePanelCell = styled.ul`
   display: flex;
   flex: 1;
   flex-direction: row;
-  margin-top: 14px;
-  margin-right: -5px;
-  margin-left: -5px;
+  margin-top: 1.4rem;
+  margin-right: -.5rem;
+  margin-left: -.5rem;
 `;
 const MePanelItem = styled.li`
-  margin-right: 5px;
-  margin-left: 5px;
+  margin: 0 .5rem;
 
   &.active {
     background: #ff7450;
     color:#fff;
   }
 
-  .me-panelitem-link {
+  .me_panelitem_link {
     @media (min-width: 720px) {
-      font-size: 14px;
-      padding-right: 14px;
-      padding-left: 14px;
+      font-size: 1.4rem;
+      padding-right: 1.2rem;
+      padding-left: 1.2rem;
     }
 
     display: block;
-    padding: 10px 14px;
+    padding: .8rem 1.2rem;
     background-color: #f8f8f8;
     color: #9b9ba0;
     font-weight: 500;
-    border-radius: 20px;
+    border-radius: 2rem;
     transition: all .3s ease-out;
     cursor: pointer;
 
@@ -60,7 +59,7 @@ function TabItems() {
       <MePanelCell>
         {items.map((item) => (
           <MePanelItem>
-            <a className="me-panelitem-link">{item}</a>
+            <a className="me_panelitem_link">{item}</a>
           </MePanelItem>
         ))}
       </MePanelCell>

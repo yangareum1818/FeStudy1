@@ -58,6 +58,7 @@ passport.use(
     },
     // @ts-ignore
     async function (request, accessToken, refreshToken, profile, done) {
+      console.log(profile);
       const user = await dbClient.user.getUserByEmail(profile.email);
       if (user.length) {
         // should unique user

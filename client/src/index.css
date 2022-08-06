@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -21,9 +22,55 @@ code {
 }
 
 a {
+  color: #282828;
   text-decoration: none;
 }
 
 ul, li, ol, dl {
   list-style: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+button, [type="button"], [type="reset"], [type="submit"] {
+    -webkit-appearance: button;
+}
+
+[type=text], [type=number], [type=tel], [type=file], [type=password], [type=email], [type=search], [type=url], textarea {
+  vertical-align: middle;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 12rem;
+  height: 4rem;
+  padding: 0 1.6rem;
+  border: 0.1rem solid #d3d3d3;
+  border-radius: 0;
+  background: #fff;
+  font-size: 1.2rem;
+  color: #424242;
+  line-height: 4rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type=checkbox] {
+  display: inline-block;
+  width: 1.6rem;
+  height: 1.6rem;
+  outline: 1px solid #6e6e73;
+  border-radius: .4rem;
+  appearance: none;
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked {
+  outline: 1px solid #ed234b;
+  background-color: #ed234b;
+}
+
+[readonly=readonly], [disabled=disabled] {
+  background-color: rgba(204,206,210,.5);
+  color: #424242;
 }
