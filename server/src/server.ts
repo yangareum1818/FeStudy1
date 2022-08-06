@@ -4,11 +4,13 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import gS from "passport-google-oauth2";
+import swaggerUi from "swagger-ui-express";
 
 import Router from "./router";
 import { SERVER_PORT } from "@constants/port";
 import authRouter from "@auth/index";
 import dbClient from "db/db";
+import swaggerFile from "../swagger-output.json";
 
 import type { UserDTO } from "db/dto/user";
 
@@ -99,5 +101,6 @@ passport.deserializeUser(async function (email: string, done) {
 
 server.use("/api", Router);
 server.use("/auth", authRouter);
+server.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 server.listen(SERVER_PORT, callbackOnExpressServerRunning);

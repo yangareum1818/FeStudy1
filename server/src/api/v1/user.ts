@@ -8,6 +8,10 @@ import type { UserDTO } from "db/dto/user";
 const userRouter = express.Router();
 
 async function getMyInfoHandler(req: Request, res: Response) {
+  // #swagger.tags = ['User']
+  // #swagger.description = "내 정보를 조회합니다(로그인 상태여야 함)."
+  // #swagger.responses[200] = { description: 'User successfully created.', schema: { $ref: '#/definitions/user' }}
+
   if (!req.isAuthenticated()) {
     return res.json({
       status: 401,
@@ -18,6 +22,13 @@ async function getMyInfoHandler(req: Request, res: Response) {
 }
 
 async function createUser(req: Request, res: Response) {
+  /**
+   * #swagger.tags = ['User']
+   * #swagger.description = "유저를 생성할 때 사용할 API Endpoint입니다."
+   *  #swagger.parameters['obj'] = { in: 'body', description: 'Patch User Data', schema: { $ref: '#/definitions/patchuser' }}
+   *  #swagger.responses[200] = { description: 'User successfully created.', schema: { $ref: '#/definitions/user' }}
+   **/
+
   const result = await dbClient.user.createUser({
     ...req.body,
   });
@@ -35,6 +46,13 @@ async function createUser(req: Request, res: Response) {
 }
 
 async function patchMyInfoHandler(req: Request, res: Response) {
+  /**
+   *  #swagger.tags = ['User']
+   *  #swagger.description = "유저를 수정할 때 사용할 API Endpoint입니다."
+   *  #swagger.parameters['obj'] = { in: 'body', description: 'Patch User Data', schema: { $ref: '#/definitions/patchuser' }}
+   *  #swagger.responses[200] = { description: 'User successfully edited.', schema: { $ref: '#/definitions/user' }}
+   */
+
   const user = req.user as UserDTO;
   // Edit userinfo
   if (!req.isAuthenticated()) {
