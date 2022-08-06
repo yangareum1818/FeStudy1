@@ -10,13 +10,17 @@ const CouresListBlock = styled.div`
 function Course() {
   const course = useCourseList();
 
+  if (course.isError) {
+    return <div> Error! </div>
+  }
+
   return (
     <>
       <TabPanel></TabPanel>
       <CouresListBlock>
-        {/* {(!course.loading && course.mycourse) ? course.mycourse.map((info) => (
+        {(!course.loading && course.mycourse && !course.isError) ? course.mycourse.map((info) => (
           <CourseItem article={info} />
-        )) : (<div> Loading.. </div>)} */}
+        )) : (<div> Loading.. </div>)}
       </CouresListBlock>
     </>
   );

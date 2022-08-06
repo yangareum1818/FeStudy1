@@ -72,7 +72,7 @@ const navList = [
   {
     path: 'https://www.daum.net',
     name: '수강 신청 내역',
-    value: 'enrolment'
+    value: 'enrollment'
   },
   {
     path: 'https://www.daum.net',
@@ -103,13 +103,15 @@ const navList = [
 
 function SideBar() {
   const username = useUserName();
-  // console.log(username);
   const couponcount = useCouponList();
-  console.log(username);
+
+  if (username.isError) {
+    return <div> Error! </div>
+  }
 
   return (
     <SidebarWrapper>
-        <NameSidebar>안녕하세요, { username.loading ? 'Loading..' : username.userName}님!</NameSidebar>
+        <NameSidebar>안녕하세요, { (!username.loading && ! username.isError) ? username.userName : 'Loading..'}님!</NameSidebar>
         <AvailableSidebarSub>사용 가능 쿠폰&nbsp;
           <SidebarCouponCount href='/coupon-list'>{ couponcount.loading ? 'Loading!' : couponcount.mycoupon.length }</SidebarCouponCount>
         </AvailableSidebarSub>

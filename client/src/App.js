@@ -23,7 +23,6 @@ function App() {
             <SectionFlex>
               <Sidebar />
               <ContentLayout />
-              {/* <div> router component 1 </div> */}
             </SectionFlex>
         </Main>
     </div>

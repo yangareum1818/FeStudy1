@@ -7,7 +7,12 @@ export default function useCouponList(args) {
   const [isError, setError] = useState(false);
 
   useEffect(() => { 
-    axios.get("http://localhost:8000/api/v1/coupons/my").then(res => {
+    axios.get("http://localhost:8000/api/v1/coupons/my", {
+      withCredentials: true
+    }).then(res => {
+      if (res.data.status === 401) { 
+        setError(true);
+      }
       setLoading(false);
       setMycoupon(res.data);
     }).catch(err => {

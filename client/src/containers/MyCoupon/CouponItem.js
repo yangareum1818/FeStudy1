@@ -52,15 +52,55 @@ const CouponItemBox = styled.div`
 `;
 
 function CouponItem(coupon) {
+
+
   const { title, showAt, hideAt, discount, description } = coupon.article;
+ 
+    const show = new Date(showAt).toISOString().split("T")[0];
+    const hide = new Date(hideAt).toISOString().replace("T", " ").replace(/\..*/, ''); 
+  
+  const toDay = function (from, to) {
+    const fromDate = new Date(from);
+    const toDate = new Date(to); 
+
+    // 까지 - 부터
+    const diffDate = toDate.getTime() - fromDate.getTime();
+    // 남은 일수
+    const DateDiff = Math.floor(Math.abs(diffDate / (1000 * 60 * 60)))
+
+    if (DateDiff >= 365 * 24) { 
+      // 년 단위로 나타낼 것임.
+      return Math.floor(DateDiff / (365 * 24)) + '년'
+    }
+
+    if (DateDiff >= 30 * 24) { 
+      // 월 단위
+      return Math.floor(DateDiff / (30 * 24)) + '달'
+    }
+
+    if (DateDiff >= 7 * 24) {
+      // 주 단위
+      return Math.floor(DateDiff / (7 * 24)) + '주'
+    }
+
+    if (DateDiff >= 24) { 
+      // 주 단위
+      return Math.floor(DateDiff / 24) + '일'
+    }
+    return DateDiff + '시간'
+  }
+
+  console.log(toDay(showAt, hideAt));
+  console.log(coupon.article);
+  
 
   return (
     <CouponItemBox>
       <div className="coupon_item">
         <div className="coupon_title">
           <div className="title_days">
-            <strong>D - 5달</strong>
-            <span>({showAt} ~ {hideAt})</span>
+            <strong>D - {toDay(showAt, hideAt)}</strong>
+            <span>({show} ~ {hide} 까지)</span>
           </div>
           <p className="title">{title}</p>
         </div>
