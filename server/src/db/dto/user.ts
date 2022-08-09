@@ -4,6 +4,7 @@ export type UserDTO = {
   id: string;
   email: string;
   name: string;
+  password: string;
   phone: string;
   email_certified: boolean;
   address: string | null;

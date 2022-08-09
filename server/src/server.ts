@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import passport from "passport";
 import gS from "passport-google-oauth2";
 import swaggerUi from "swagger-ui-express";
+import localStrategy from "passport-local";
+import bcrypt from "bcrypt";
 
 import Router from "./router";
 import { SERVER_PORT } from "@constants/port";
@@ -19,6 +21,7 @@ function callbackOnExpressServerRunning() {
 }
 
 const GoogleStrategy = gS.Strategy;
+const LocalStrategy = localStrategy.Strategy;
 
 const server = express();
 
@@ -60,7 +63,6 @@ passport.use(
     },
     // @ts-ignore
     async function (request, accessToken, refreshToken, profile, done) {
-      console.log(profile);
       const user = await dbClient.user.getUserByEmail(profile.email);
       if (user.length) {
         // should unique user
@@ -80,6 +82,48 @@ passport.use(
           data as Omit<UserDTO, "ID" | "updated_at" | "created_at">
         );
         return done(null, newUser[0]);
+      }
+    }
+  )
+);
+
+// Local Login 전략
+passport.use(
+  "local",
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+    },
+    async (email, password, done) => {
+      try {
+        const __secureUserInfo = await dbClient.user.__secureGetUserInfoByEmail(
+          email
+        );
+
+        // Email로 필터링된 계정이 없는 경우에.
+        if (!__secureUserInfo.length) {
+          return done(null, false);
+        }
+        const result = await bcrypt.compare(
+          password,
+          __secureUserInfo[0].password
+        );
+
+        if (result) {
+          const user = await dbClient.user.getUserByEmail(email);
+          const userWithEmailProvider = user.filter(
+            (u) => u.provider === "email"
+          );
+          if (!userWithEmailProvider.length) {
+            return done(null, false);
+          }
+          return done(null, user[0]);
+        }
+        return done(null, false);
+      } catch (e) {
+        console.log(e);
+        return done(e);
       }
     }
   )

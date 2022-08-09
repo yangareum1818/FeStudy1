@@ -42,6 +42,10 @@ const doc = {
       organization: "Organization",
       company: "토양어선",
     },
+    emaillogin: {
+      email: "remigailard8@naver.com",
+      password: "1234",
+    },
   },
 };
 
