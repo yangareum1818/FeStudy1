@@ -27,6 +27,7 @@ const doc = {
       name: "안녕아녕",
       email: "remigailard80@korea.ac.kr",
       name: "김민석[ 학부재학 / 보건환경융합과학부 ]",
+      password: "1234",
       phone: null,
       address: null,
       organization: null,
