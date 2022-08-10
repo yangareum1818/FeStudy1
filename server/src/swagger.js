@@ -27,6 +27,7 @@ const doc = {
       name: "안녕아녕",
       email: "remigailard80@korea.ac.kr",
       name: "김민석[ 학부재학 / 보건환경융합과학부 ]",
+      password: "1234",
       phone: null,
       address: null,
       organization: null,
@@ -41,6 +42,10 @@ const doc = {
       address: "경기도 성남시 수정구 ㅇㅇㅇ",
       organization: "Organization",
       company: "토양어선",
+    },
+    emaillogin: {
+      email: "remigailard8@naver.com",
+      password: "1234",
     },
   },
 };

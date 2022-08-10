@@ -13,14 +13,43 @@ export class UserRepository {
   }
 
   async getUserById(id: string): Promise<UserDTO[]> {
-    const result = await this.knex("user").select("*").where({ id: id });
+    const result = await this.knex("user")
+      .select([
+        "phone",
+        "name",
+        "email",
+        "address",
+        "organization",
+        "company",
+        "provider",
+      ])
+      .where({ id: id });
     return result.map((r) => {
       return joinSerializer(r, { omit: ["user"] });
     });
   }
 
   async getUserByEmail(email: string): Promise<UserDTO[]> {
-    const result = await this.knex("user").select("*").where({ email: email });
+    const result = await this.knex("user")
+      .select([
+        "phone",
+        "name",
+        "email",
+        "address",
+        "organization",
+        "company",
+        "provider",
+      ])
+      .where({ email: email });
+    return result.map((r) => {
+      return joinSerializer(r, { omit: ["user"] });
+    });
+  }
+
+  async __secureGetUserInfoByEmail(email: string): Promise<UserDTO[]> {
+    const result = await this.knex("user")
+      .select(["password"])
+      .where({ email: email });
     return result.map((r) => {
       return joinSerializer(r, { omit: ["user"] });
     });
@@ -33,7 +62,8 @@ export class UserRepository {
       ...data,
     };
     const currentTime = new Date();
-    const result = await this.knex("user").insert({
+
+    await this.knex("user").insert({
       ...newUserData,
       created_at: currentTime,
       updated_at: currentTime,
