@@ -1,4 +1,5 @@
 import express from "express";
+import bcrpyt from "bcrypt";
 
 import dbClient from "db/db";
 
@@ -13,7 +14,7 @@ async function getMyInfoHandler(req: Request, res: Response) {
   // #swagger.responses[200] = { description: 'User successfully created.', schema: { $ref: '#/definitions/user' }}
 
   if (!req.isAuthenticated()) {
-    return res.json({
+    return res.status(401).json({
       status: 401,
       message: "인증되지 않았습니다.",
     });
@@ -28,19 +29,33 @@ async function createUser(req: Request, res: Response) {
    *  #swagger.parameters['obj'] = { in: 'body', description: 'Patch User Data', schema: { $ref: '#/definitions/patchuser' }}
    *  #swagger.responses[200] = { description: 'User successfully created.', schema: { $ref: '#/definitions/user' }}
    **/
+  if (!req.body.email) {
+    return res
+      .status(500)
+      .json({ message: "email이 Payload에 포함되지 않았습니다." });
+  }
+  if (!req.body.name) {
+    return res
+      .status(500)
+      .send({ message: "name이 Payload에 포함되지 않았습니다." });
+  }
+
+  const isEmailDuplicated = await dbClient.user.getUserByEmail(req.body.email);
+
+  if (isEmailDuplicated.length) {
+    return res.status(500).json({
+      message: "이미 같은 email을 가진 유저가 있습니다",
+    });
+  }
 
   const result = await dbClient.user.createUser({
     ...req.body,
+    password: bcrpyt.hashSync(req.body.password, 10),
+    provider: "email",
   });
-  if (!req.isAuthenticated()) {
-    return res.json({
-      status: 401,
-      message: "인증되지 않았습니다.",
-    });
-  }
-  return res.json({
+
+  return res.status(200).json({
     message: "Success to create User",
-    status: 200,
     result: result[0],
   });
 }
@@ -56,36 +71,31 @@ async function patchMyInfoHandler(req: Request, res: Response) {
   const user = req.user as UserDTO;
   // Edit userinfo
   if (!req.isAuthenticated()) {
-    return res.json({
-      status: 401,
+    return res.status(401).json({
       message: "인증되지 않았습니다.",
     });
   }
 
   if (!req.body.id) {
-    return res.json({
-      status: 500,
+    return res.status(500).json({
       message: "유저 아이디가 제공되지 않았습니다.",
     });
   }
 
   if (user.provider === "google") {
-    return res.json({
-      status: 500,
+    return res.status(500).json({
       message: "구글 계정으로 로그인한 경우 이메일 정보를 수정할 수 없습니다.",
     });
   }
 
   const result = await dbClient.user.updateUserById(req.body.id, req.body.data);
   if (!result) {
-    return res.json({
+    return res.status(500).json({
       message: "유저 업데이트가 실패하였습니다.",
-      status: 500,
     });
   }
-  return res.json({
+  return res.status(200).json({
     message: "success to patch request",
-    status: 200,
     result: result[0],
   });
 }

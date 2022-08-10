@@ -33,6 +33,9 @@
             "schema": {
               "$ref": "#/definitions/user"
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -50,6 +53,9 @@
             "schema": {
               "$ref": "#/definitions/user"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -74,6 +80,12 @@
             "schema": {
               "$ref": "#/definitions/user"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -104,6 +116,62 @@
             "description": "OK"
           }
         }
+      }
+    },
+    "/auth/local/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "이메일을 통해 로그인을 할 때 이동하는 Endpoint입니다.",
+        "parameters": [
+          {
+            "name": "querystring",
+            "description": "로그인 후 돌아올 URL",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "redirect_url": {
+                  "type": "string",
+                  "example": "http://localhost:3000"
+                }
+              }
+            },
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/local/login/fail": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/local/logout": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {}
       }
     },
     "/auth/google/login": {
