@@ -1,6 +1,7 @@
 import React from 'react';
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 import { rem } from '../constants/style';
+import { ReactComponent as Google } from '../images/icons8-google.svg';
 
 // Button Reset
 export const btnReset = styled.button`
@@ -25,7 +26,7 @@ export const btnReset = styled.button`
 export const BtnGroup = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 3rem;
+  margin-top: ${(props) => props.MTop || '3rem'};
   margin-right: -0.75rem;
   margin-left: -0.75rem;
 `;
@@ -44,6 +45,7 @@ export const DefaultBtn = styled(btnReset).attrs(props => ({
   color: #fff;
   border-color: #ed234b;
   background-color: #ed234b;
+  font-size: 1.6rem;
 
   :hover, :focus {
     ${(props) => props.touch && css`
@@ -53,17 +55,41 @@ export const DefaultBtn = styled(btnReset).attrs(props => ({
   `}}
 `;
 
-export default function DefaultButton({ text, grow, type, children }) {
+export default function DefaultButton({ text, grow, type, MTop, children }) {
   return (
-    <BtnGroup>
+    <BtnGroup MTop={MTop}>
       <DefaultBtn type={type} grow={grow} touch>{text}</DefaultBtn>
     </BtnGroup>
   )
 }
 
+
+// WhiteSmokeButton
+export const WhiteSmokeBtn = styled(DefaultBtn)`
+  border-color: #f2f2f2;
+  background-color: #f2f2f2;
+  font-size: 1.6rem;
+  color: #5e5e5e;
+  line-height: 2.4rem;
+
+  :hover, :focus {
+    border-color: #e2e2e2;
+    background-color: #e2e2e2;
+  }
+`;
+
+export function WhiteSmokeButton({ type, text, MTop, grow, children }) {
+  return (
+    <BtnGroup MTop={MTop}>
+      <WhiteSmokeBtn type={type} grow={grow}>{text}</WhiteSmokeBtn>
+    </BtnGroup>
+  )
+}
+
+
 export const Btn = styled(btnReset)`
   flex-grow: ${(props) => props.flexgrow || '0'};
-  padding: ${rem.xsmSpacing} ${rem.lgSpacing};
+  padding: ${rem.smSpacing} ${rem.lgSpacing};
   margin-left: ${rem.xsmSpacing};
   border: .1rem solid ${(props) => props.border || "#6e6e73"};
   background-color: ${(props) => props.backgroundColor || "#fff"};
@@ -81,5 +107,25 @@ export const Btn = styled(btnReset)`
 export function Button({ text, flexgrow, backgroundColor, color, children }) {
   return (
     <Btn flexgrow={flexgrow} backgroundColor={backgroundColor} color={color} touch>{text}</Btn>
+  )
+}
+
+// sns login btn
+export const WhiteBtn = styled(btnReset)`
+  width: 100%;
+  min-height: 4.2rem;
+  color: #6e6e73;
+  border: 1px solid #6e6e73;
+  background: #fff;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+`;
+
+export function GoogleBtn({ text, children }) {
+  return (
+    <WhiteBtn>
+      <Google />
+      {text}
+    </WhiteBtn>
   )
 }

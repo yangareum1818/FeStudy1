@@ -7,6 +7,7 @@ const Container = styled.div`
   }
 
   padding: 0 1.6rem;
+  font-size: 1.4rem;
 `;
 
 const MainInterval = styled.main`

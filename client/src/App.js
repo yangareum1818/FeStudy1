@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-import Sidebar from './Layout/Sidebar';
 import Header from './Layout/Header';
 import Main from './Layout/Main';
+import Sidebar from './Layout/Sidebar';
 import ContentLayout from './Layout/ContentLayout';
+import Account from "./containers/Account/Account";
 
 const SectionFlex = styled.section`
   @media (min-width: 960px) {
@@ -18,13 +19,14 @@ const SectionFlex = styled.section`
 function App() {
   return (
     <div className="App">
-        <Header />
-        <Main>
-            <SectionFlex>
-              <Sidebar />
-              <ContentLayout />
-            </SectionFlex>
-        </Main>
+      <Header />
+      <Main>
+        <Account />
+        <SectionFlex>
+          <Sidebar />
+          <ContentLayout />
+        </SectionFlex>
+      </Main>
     </div>
   );
 }

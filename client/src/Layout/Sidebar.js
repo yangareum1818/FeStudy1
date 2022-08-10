@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink } from 'react-router-dom'
 
 import useCouponList from '../hooks/useCouponList';
-import useUserName from '../hooks/useUserName';
+import useUserInfo from '../hooks/useUserInfo';
 
 const SidebarWrapper = styled.nav`
   @media (min-width: 960px) {
@@ -102,16 +102,16 @@ const navList = [
 ];
 
 function SideBar() {
-  const username = useUserName();
+  const userInfo = useUserInfo();
   const couponcount = useCouponList();
 
-  if (username.isError) {
+  if (userInfo.isError) {
     return <div> Error! </div>
   }
 
   return (
     <SidebarWrapper>
-        <NameSidebar>안녕하세요, { (!username.loading && ! username.isError) ? username.userName : 'Loading..'}님!</NameSidebar>
+        <NameSidebar>안녕하세요, { (!userInfo.loading && ! userInfo.isError) ? userInfo.info.name : 'Loading..'}님!</NameSidebar>
         <AvailableSidebarSub>사용 가능 쿠폰&nbsp;
           <SidebarCouponCount href='/coupon-list'>{ couponcount.loading ? 'Loading!' : couponcount.mycoupon.length }</SidebarCouponCount>
         </AvailableSidebarSub>

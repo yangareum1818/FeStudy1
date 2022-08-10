@@ -89,9 +89,6 @@ function CouponItem(coupon) {
     }
     return DateDiff + '시간'
   }
-
-  console.log(toDay(showAt, hideAt));
-  console.log(coupon.article);
   
 
   return (

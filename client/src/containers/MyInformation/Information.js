@@ -1,7 +1,9 @@
-import styled, {css} from "styled-components"
+import styled from "styled-components"
+import useUserInfo from '../../hooks/useUserInfo'
 import { rem } from '../../constants/style';
 import DefaultButton, { Button } from '../../components/Button';
-import InputBox, { CheckBox } from '../../components/Input'
+import InputBox from '../../components/Input'
+import CheckBox from "../../components/CheckBox";
 
 // Strong Line
 const MDivider = styled.h3`
@@ -112,6 +114,12 @@ const DeleteBtn = styled.a`
 `;
 
 function Information() {
+  const userInfo = useUserInfo();
+  console.log(userInfo);
+
+  if (userInfo.loading) { 
+    return <div> loading... </div>
+  }
   return (
       <FormWrapper>
         <form>
@@ -120,22 +128,22 @@ function Information() {
             
             <InfoContent>
               <InfoCont>
-                <InputBox text={"이름"} flexgrow={".1"} />
+                <InputBox text={"이름"} flexgrow={".1"} defaultValue={userInfo.info.name} />
                 <Button text={"변경"} />
               </InfoCont>
             
               <InfoCont>
-                <InputBox type={"email"} text={"이메일"} flexgrow={".5"} />
+                <InputBox type={"email"} text={"이메일"} flexgrow={".5"} defaultValue={userInfo.info.email} />
                 <Button text={"변경"} />
               </InfoCont>
             
               <InfoCont>
-                <InputBox type={"tel"} text={"휴대전화"} flexgrow={".5"} />
+                <InputBox type={"tel"} text={"휴대전화"} flexgrow={".5"} defaultValue={userInfo.info.phone} />
                 <Button text={"변경"} />
               </InfoCont>
             
               <InfoCont>
-                <InputBox type={"password"} text={"비밀번호"} flexgrow={".5"} />
+                <InputBox type={"password"} text={"비밀번호"} flexgrow={".5"} placeholder={"************"} />
                 <Button text={"변경"} touch />
               </InfoCont> 
             
@@ -198,7 +206,7 @@ function Information() {
               <CheckBox text={"문자메세지 수신"} />
             </CheckBoxWrapper>
             
-            <DefaultButton type={'submit'} text={"수정 완료"} grow={".5"} touch />
+            <DefaultButton text={"수정 완료"} grow={".5"} touch />
           </Agreement>
         
           <Delete>

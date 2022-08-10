@@ -15,7 +15,7 @@ function Header() {
   return (
     <Head>
       HEADER
-      <a href={`http://localhost:8000/auth/google/login?redirect_url=${window.location}`}> Login </a>
+      <a href="/Login"> Login </a>
     </Head>
   );
 }
