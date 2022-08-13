@@ -119,7 +119,7 @@ function SideBar() {
           {navList.map((item, index) => (
             <li>
               <NavLink
-                key={ index}
+                key={index}
                 className={({ isActive }) => isActive ? "list_item active" : "list_item"}
                 to={item.path}
               >

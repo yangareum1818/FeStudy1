@@ -56,8 +56,8 @@ function CouponItem(coupon) {
 
   const { title, showAt, hideAt, discount, description } = coupon.article;
  
-    const show = new Date(showAt).toISOString().split("T")[0];
-    const hide = new Date(hideAt).toISOString().replace("T", " ").replace(/\..*/, ''); 
+  const show = new Date(showAt).toISOString().split("T")[0];
+  const hide = new Date(hideAt).toISOString().replace("T", " ").replace(/\..*/, ''); 
   
   const toDay = function (from, to) {
     const fromDate = new Date(from);

@@ -55,10 +55,10 @@ export const DefaultBtn = styled(btnReset).attrs(props => ({
   `}}
 `;
 
-export default function DefaultButton({ text, grow, type, MTop, children }) {
+export default function DefaultButton({ text, grow, type, MTop, children, ...rest }) {
   return (
-    <BtnGroup MTop={MTop}>
-      <DefaultBtn type={type} grow={grow} touch>{text}</DefaultBtn>
+    <BtnGroup MTop={MTop} {...rest}>
+      <DefaultBtn type={type} grow={grow} touch {...rest}>{text}</DefaultBtn>
     </BtnGroup>
   )
 }
@@ -78,10 +78,10 @@ export const WhiteSmokeBtn = styled(DefaultBtn)`
   }
 `;
 
-export function WhiteSmokeButton({ type, text, MTop, grow, children }) {
+export function WhiteSmokeButton({ text, ...rest }) {
   return (
-    <BtnGroup MTop={MTop}>
-      <WhiteSmokeBtn type={type} grow={grow}>{text}</WhiteSmokeBtn>
+    <BtnGroup {...rest}>
+      <WhiteSmokeBtn {...rest} >{text}</WhiteSmokeBtn>
     </BtnGroup>
   )
 }
@@ -111,7 +111,9 @@ export function Button({ text, flexgrow, backgroundColor, color, children }) {
 }
 
 // sns login btn
-export const WhiteBtn = styled(btnReset)`
+export const WhiteBtn = styled(btnReset).attrs(props => ({
+  type: 'button'
+}))`
   width: 100%;
   min-height: 4.2rem;
   color: #6e6e73;
@@ -121,9 +123,9 @@ export const WhiteBtn = styled(btnReset)`
   line-height: 2.4rem;
 `;
 
-export function GoogleBtn({ text, children }) {
+export function GoogleBtn({ text, onClick, children }) {
   return (
-    <WhiteBtn>
+    <WhiteBtn onClick={onClick}>
       <Google />
       {text}
     </WhiteBtn>

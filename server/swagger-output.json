@@ -126,18 +126,12 @@
         "description": "이메일을 통해 로그인을 할 때 이동하는 Endpoint입니다.",
         "parameters": [
           {
-            "name": "querystring",
-            "description": "로그인 후 돌아올 URL",
+            "name": "obj",
+            "in": "body",
+            "description": "Login",
             "schema": {
-              "type": "object",
-              "properties": {
-                "redirect_url": {
-                  "type": "string",
-                  "example": "http://localhost:3000"
-                }
-              }
-            },
-            "in": "query"
+              "$ref": "#/definitions/emaillogin"
+            }
           }
         ],
         "responses": {
@@ -298,6 +292,10 @@
           "type": "string",
           "example": "remigailard80@korea.ac.kr"
         },
+        "password": {
+          "type": "string",
+          "example": "1234"
+        },
         "address": {},
         "organization": {},
         "company": {}
@@ -337,6 +335,19 @@
         "company": {
           "type": "string",
           "example": "토양어선"
+        }
+      }
+    },
+    "emaillogin": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "remigailard8@naver.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "1234"
         }
       }
     }

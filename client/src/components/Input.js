@@ -39,6 +39,10 @@ export default function InputBox({ type, text, flexgrow, placeholder, defaultVal
 
 
 // Auth Input
+export const AuthInputWrapper = styled.div`
+  margin-bottom: 1.6rem;
+`;
+
 export const AuthLabel = styled.label`
   font-size: ${rem.smSpacing};
 `;
@@ -77,11 +81,13 @@ export const AuthInput = styled.input.attrs(props => ({
   }
 `;
 
-export function AuthInputBox({ text, children }) {
+export function AuthInputBox({ label, ...rest }) {
   return (
-    <AuthLabel>
-      {text && <AuthLabelText>{text}</AuthLabelText>}
-      <AuthInput/>
-    </AuthLabel>
+    <AuthInputWrapper>
+      <AuthLabel>
+        {label && <AuthLabelText>{label}</AuthLabelText>}
+        <AuthInput {...rest} />
+      </AuthLabel>
+    </AuthInputWrapper>
   )
 }

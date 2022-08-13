@@ -11,11 +11,13 @@ const Head = styled.header`
   border-bottom: .1rem solid #eee;
 `;
 
-function Header() {
+function Header({ children }) {
   return (
     <Head>
       HEADER
-      <a href="/Login"> Login </a>
+      <a href="/account/signin"> 로그인
+        { children }
+      </a>
     </Head>
   );
 }

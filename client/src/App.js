@@ -1,32 +1,19 @@
-import styled from "styled-components";
-
-import Header from './Layout/Header';
-import Main from './Layout/Main';
-import Sidebar from './Layout/Sidebar';
-import ContentLayout from './Layout/ContentLayout';
-import Account from "./containers/Account/Account";
-
-const SectionFlex = styled.section`
-  @media (min-width: 960px) {
-    margin: 0 -1rem;
-  }
-
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-`;
+import { Route, Routes } from "react-router-dom";
+import CouponList from './containers/MyCoupon/CouponList'
+import CourseList from './containers/MyContant/CourseList'
+import SignUp from "./containers/Account/Signup";
+import SignIn from "./containers/Account/Signin";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Main>
-        <Account />
-        <SectionFlex>
-          <Sidebar />
-          <ContentLayout />
-        </SectionFlex>
-      </Main>
+      <Routes>
+        <Route path="/account/signup" element={<SignUp />} />
+        <Route path="/account/signin" element={<SignIn />} />
+        <Route path="/coupon-list" element={<CouponList />} />
+        <Route path="/" element={<CourseList />} />
+        <Route />
+      </Routes>
     </div>
   );
 }
