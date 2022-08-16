@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const MePanel = styled.div`
@@ -24,13 +25,9 @@ const MePanelCell = styled.ul`
 `;
 const MePanelItem = styled.li`
   margin: 0 .5rem;
+`
 
-  &.active {
-    background: #ff7450;
-    color:#fff;
-  }
-
-  .me_panelitem_link {
+const CategoryLink = styled(NavLink)`
     @media (min-width: 720px) {
       font-size: 1.4rem;
       padding-right: 1.2rem;
@@ -49,17 +46,41 @@ const MePanelItem = styled.li`
     &:focus, &:hover {
       background: #e6e8eb;
     }
-  }
-`
+    
+    &.active {
+      background: #ff7450;
+      color:#fff;
+    }
+`;
 
 function TabItems() {
-  const items = ['전체 목록', '수강 예정', '수강중', '수강 완료'];
+  const courseItem = [
+    {
+      name: 'all',
+      text: '전체 목록',
+    },
+    {
+      name: 'expected',
+      text: '수강 예정',
+    },
+    {
+      name: 'taking',
+      text: '수강중',
+    },
+    {
+      name: 'completion',
+      text: '수강완료',
+    },
+  ];
   return (
     <MePanel>
       <MePanelCell>
-        {items.map((item) => (
+        {courseItem.map((category) => (
           <MePanelItem>
-            <a className="me_panelitem_link">{item}</a>
+            <CategoryLink key={category.name} className={({ isActive }) => (isActive ? "active" : "undefined")} to={category.name === 'all' ? '/' : `/${category.name}`}
+            >
+              {category.text}
+            </CategoryLink>
           </MePanelItem>
         ))}
       </MePanelCell>

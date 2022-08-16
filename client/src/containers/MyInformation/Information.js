@@ -4,6 +4,7 @@ import { rem } from '../../constants/style';
 import DefaultButton, { Button } from '../../components/Button';
 import InputBox from '../../components/Input'
 import CheckBox from "../../components/CheckBox";
+import CommonPageLayout from "../../Layout/CommonPageLayout";
 
 // Strong Line
 const MDivider = styled.h3`
@@ -121,6 +122,7 @@ function Information() {
     return <div> loading... </div>
   }
   return (
+    <CommonPageLayout>
       <FormWrapper>
         <form>
           <InfoBox>
@@ -214,6 +216,7 @@ function Information() {
           </Delete>
         </form>
       </FormWrapper>
+    </CommonPageLayout>
   )
 }
 

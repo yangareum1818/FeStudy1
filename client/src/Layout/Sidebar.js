@@ -35,26 +35,29 @@ const SidebarCouponCount = styled.a`
   text-decoration: underline;
 `;
 
-const NavListWraaper = styled.ul`
+const SidebarListWraaper = styled.ul`
   margin-top: 3.4rem;
   font-size: 1.6rem;
   border-top: .1rem solid #e6e8eb;
+`;
 
-  .list_item {
-    display: block;
-    padding: 2rem 0 1.9rem;
-    color: #282828;
-    border-bottom: .1rem solid #e6e8eb;
-    transition: all .3s ease-out;
-    cursor: pointer;
+const SidebarList = styled.li`
+  padding: 2rem 0 1.9rem;
+  border-bottom: .1rem solid #e6e8eb;
+`;
 
-    &.active {
-      font-weight: bold;
-    }
+const SidebarLink = styled(NavLink)`
+  display: block;
+  color: #282828;
+  transition: all .3s ease-out;
+  cursor: pointer;
 
-    &:hover, &:focus {
-      color: #ed234b;
-    }
+  &.active {
+    font-weight: bold;
+  }
+
+  &:hover, &:focus {
+    color: #ed234b;
   }
 `;
 
@@ -62,10 +65,10 @@ const navList = [
   {
     path: '/',
     name: '내 강의 보기',
-    value: 'all'
+    value: 'course-list'
   },
   {
-    path: 'https://www.daum.net',
+    path: '/shortbook',
     name: '내 숏북 보기',
     value: 'shortbook'
   },
@@ -80,14 +83,14 @@ const navList = [
     value: 'deal'
   },
   {
-    path: '/coupon-list',
+    path: '/coupon',
     name: '쿠폰 내역',
-    value: 'coupon'
+    value: 'coupon-list'
   },
   {
     path: '/information',
     name: '회원 정보 수정',
-    value: 'profile'
+    value: 'information'
   },
   {
     path: 'https://www.daum.net',
@@ -115,19 +118,19 @@ function SideBar() {
         <AvailableSidebarSub>사용 가능 쿠폰&nbsp;
           <SidebarCouponCount href='/coupon-list'>{ couponcount.loading ? 'Loading!' : couponcount.mycoupon.length }</SidebarCouponCount>
         </AvailableSidebarSub>
-        <NavListWraaper className='navlist_wrapper'>
-          {navList.map((item, index) => (
-            <li>
-              <NavLink
-                key={index}
-                className={({ isActive }) => isActive ? "list_item active" : "list_item"}
+        <SidebarListWraaper>
+          {navList.map((item) => (
+            <SidebarList>
+              <SidebarLink
+                key={item.name}
+                className={({ isActive }) => (isActive ? "active" : "")}
                 to={item.path}
               >
                 {item.name}
-              </NavLink>
-            </li>
+              </SidebarLink>
+            </SidebarList>
           ))}
-        </NavListWraaper>
+        </SidebarListWraaper>
     </SidebarWrapper>
   );
 }
