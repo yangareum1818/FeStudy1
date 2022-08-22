@@ -1,10 +1,13 @@
 import styled from "styled-components"
 import useUserInfo from '../../hooks/useUserInfo'
+import useUserInfoChange from '../../hooks/useUserInfoChange'
 import { rem } from '../../constants/style';
 import DefaultButton, { Button } from '../../components/Button';
 import InputBox from '../../components/Input'
 import CheckBox from "../../components/CheckBox";
 import CommonPageLayout from "../../Layout/CommonPageLayout";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 // Strong Line
 const MDivider = styled.h3`
@@ -83,13 +86,13 @@ const AgreeTitle = styled.div`
 `;
 
 const CheckMoreBtn = styled.button`
-  font-size: 1.2rem;
-  transition-property: all;
-  transition-duration: .2s;
-  transition-timing-function: ease-out;
+  display: inline-block;
   padding: 0 0.4rem;
-  border: 0.1rem solid #9b9ba0;
   color: #9b9ba0;
+  border: 0.1rem solid #9b9ba0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  transition: all .2s ease-out;
 
   :hover {
     color: #ff7450;
@@ -116,7 +119,30 @@ const DeleteBtn = styled.a`
 
 function Information() {
   const userInfo = useUserInfo();
-  console.log(userInfo);
+
+  const [newinfo, setNewInfo] = useState({
+    id: '',
+    name: '',
+    email: '',
+    phone: ''
+  });
+
+  const useNewInfoSend = (e) => {
+    e.preventDefault();
+    axios.patch("http://localhost:8000/api/v1/user/my", newinfo, { withCredentials: true }).then(req => {
+      setNewInfo(req.data);
+      alert('수정이 완료되었습니다.');
+    }).catch((err) => {
+      alert(err.response.data.message ?? "수정사항을 다시 한번 확인해주세요.");
+    });
+  }
+
+  const onChange = (e) => {
+    setNewInfo({
+      ...userInfo.info,
+      [e.target.name]: e.target.value
+    });
+  }
 
   if (userInfo.loading) { 
     return <div> loading... </div>
@@ -130,22 +156,22 @@ function Information() {
             
             <InfoContent>
               <InfoCont>
-                <InputBox text={"이름"} flexgrow={".1"} defaultValue={userInfo.info.name} />
+                <InputBox text={"이름"} flexgrow={'.1'} name={"name"} onChange={onChange} defaultValue={userInfo.info.name} />
                 <Button text={"변경"} />
               </InfoCont>
             
               <InfoCont>
-                <InputBox type={"email"} text={"이메일"} flexgrow={".5"} defaultValue={userInfo.info.email} />
+                <InputBox type={"email"} text={"이메일"} flexgrow={".5"} name={"email"} onChange={onChange} defaultValue={userInfo.info.email} />
                 <Button text={"변경"} />
               </InfoCont>
             
               <InfoCont>
-                <InputBox type={"tel"} text={"휴대전화"} flexgrow={".5"} defaultValue={userInfo.info.phone} />
+                <InputBox type={"tel"} text={"휴대전화"} flexgrow={".5"} name={"phone"} onChange={onChange} defaultValue={userInfo.info.phone} />
                 <Button text={"변경"} />
               </InfoCont>
             
               <InfoCont>
-                <InputBox type={"password"} text={"비밀번호"} flexgrow={".5"} placeholder={"************"} />
+                <InputBox type={"password"} text={"비밀번호"} flexgrow={".5"} placeholder={"새로운 비밀번호를 입력해주세요."} />
                 <Button text={"변경"} touch />
               </InfoCont> 
             
@@ -208,7 +234,7 @@ function Information() {
               <CheckBox text={"문자메세지 수신"} />
             </CheckBoxWrapper>
             
-            <DefaultButton text={"수정 완료"} grow={".5"} touch />
+            <DefaultButton text={"수정 완료"} grow={".5"} onClick={useNewInfoSend} touch />
           </Agreement>
         
           <Delete>

@@ -17,7 +17,7 @@ const AuthSection = styled.section`
   padding: 6rem 2rem;
 `;
 
-const AuthH1 = styled.h1`
+const AuthHeader = styled.h1`
   margin: 0.67em 0;
   font-size: 2rem;
 `;
@@ -37,13 +37,13 @@ const AuthText = styled.p`
   line-height: 3.6rem;
 `;
 
-const AuthCont = styled.div``;
+const AuthContainer = styled.div``;
 
 function AccountPageLayout({ children }) {
   return (
     <Main>
       <AuthSection>
-        <AuthH1>
+        <AuthHeader>
           <AuthLink href='/' >
             <Logo />
           </AuthLink>
@@ -51,11 +51,11 @@ function AccountPageLayout({ children }) {
             인생을 바꾸는 교육,<br/>
             패스트캠퍼스.
           </AuthText>
-        </AuthH1>
+        </AuthHeader>
 
-        <AuthCont>
+        <AuthContainer>
           { children }
-        </AuthCont>
+        </AuthContainer>
       </AuthSection>
     </Main>
   )

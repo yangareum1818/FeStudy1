@@ -15,6 +15,7 @@ export class UserRepository {
   async getUserById(id: string): Promise<UserDTO[]> {
     const result = await this.knex("user")
       .select([
+        "id",
         "phone",
         "name",
         "email",
@@ -32,6 +33,7 @@ export class UserRepository {
   async getUserByEmail(email: string): Promise<UserDTO[]> {
     const result = await this.knex("user")
       .select([
+        "id",
         "phone",
         "name",
         "email",

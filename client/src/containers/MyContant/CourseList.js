@@ -21,7 +21,7 @@ function Course() {
       <Title text={"내 강의 보기"} />
       <TabPanel></TabPanel>
       <CouresListBlock>
-        {(!course.loading && course.mycourse && !course.isError) ? course.mycourse.map((article) => (
+        {(!course.loading && course.mycourse) ? course.mycourse.map((article) => (
           <CourseItem article={article} />
         )) : (<div> Loading.. </div>)}
       </CouresListBlock>

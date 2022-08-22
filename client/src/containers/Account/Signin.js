@@ -44,8 +44,8 @@ function SignIn() {
         <AuthInputBox type={"email"} label={"이메일"} />
         <AuthInputBox type={"password"} label={"비밀번호"} />
         <CheckBox text={"자동 로그인"} />
-        <DefaultButton text={"로그인"} grow={"1"} MTop={"3.2rem"} />
-        <WhiteSmokeButton onClick={SignupLink} type={"button"} text={"이메일로 회원가입"} grow={"1"} MTop={"1.6rem"} />
+        <DefaultButton text={"로그인"} />
+        <WhiteSmokeButton onClick={SignupLink} type={"button"} text={"이메일로 회원가입"} MTop={"1.6rem"} />
       </FormBox>
     </AccountPageLayout>
   )

@@ -82,13 +82,13 @@ async function patchMyInfoHandler(req: Request, res: Response) {
     });
   }
 
-  if (user.provider === "google") {
+  if (user.provider === "google" && user.email !== req.body.email) {
     return res.status(500).json({
       message: "구글 계정으로 로그인한 경우 이메일 정보를 수정할 수 없습니다.",
     });
   }
 
-  const result = await dbClient.user.updateUserById(req.body.id, req.body.data);
+  const result = await dbClient.user.updateUserById(req.body.id, req.body);
   if (!result) {
     return res.status(500).json({
       message: "유저 업데이트가 실패하였습니다.",

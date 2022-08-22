@@ -24,7 +24,7 @@ function Coupon() {
     <CommonPageLayout>
       <CouponInputBar />
       <CouponsListBlock>
-        {(!couponlist.loading && couponlist.mycoupon && !couponlist.isError) ? couponlist.mycoupon.map((coupon) => (
+        {(!couponlist.loading && couponlist.mycoupon) ? couponlist.mycoupon.map((coupon) => (
           <CouponItem coupon={coupon} />
         )) : (<div>Loaing...</div>)}
       </CouponsListBlock>

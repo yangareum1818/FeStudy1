@@ -85,3 +85,9 @@ input[type=checkbox]:checked {
   background-color: rgba(204,206,210,.5);
   color: #424242;
 }
+
+::selection {
+  background: #ed234b;
+  color: #fff;
+  text-shadow: none;
+}

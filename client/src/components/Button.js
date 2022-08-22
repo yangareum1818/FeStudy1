@@ -35,7 +35,7 @@ export const DefaultBtn = styled(btnReset).attrs(props => ({
   type: props.type || 'submit',
 }))`
   flex: 1;
-  flex-grow: ${(props) => props.grow || '.5'};
+  flex-grow: ${(props) => props.grow || '1'};
   margin-right: 0.75rem;
   margin-left: 0.75rem;
   padding-right: 1.24rem;
@@ -57,8 +57,8 @@ export const DefaultBtn = styled(btnReset).attrs(props => ({
 
 export default function DefaultButton({ text, grow, type, MTop, children, ...rest }) {
   return (
-    <BtnGroup MTop={MTop} {...rest}>
-      <DefaultBtn type={type} grow={grow} touch {...rest}>{text}</DefaultBtn>
+    <BtnGroup {...rest}>
+      <DefaultBtn touch grow={grow} {...rest}>{text}</DefaultBtn>
     </BtnGroup>
   )
 }
@@ -104,9 +104,9 @@ export const Btn = styled(btnReset)`
 `;
 
 
-export function Button({ text, flexgrow, backgroundColor, color, children }) {
+export function Button({ text, children, ...rest }) {
   return (
-    <Btn flexgrow={flexgrow} backgroundColor={backgroundColor} color={color} touch>{text}</Btn>
+    <Btn {...rest} touch>{text}</Btn>
   )
 }
 

@@ -18,21 +18,20 @@ export const Input = styled.input.attrs(props => ({
 }))`
   display: block;
   margin: ${(props) => props.margin || `0`};
-  padding: ${rem.smSpacing} ${rem.lgSpacing};
+  padding: ${rem.zero} ${rem.lgSpacing};
   width: 100%;
   min-width: 100%;
 
   &:focus {
     outline: none;
   }
-
 `;
 
-export default function InputBox({ type, text, flexgrow, placeholder, defaultValue, color, children }) {
+export default function InputBox({ text, flexgrow, children, ...rest }) {
   return (
-    <Label flexgrow={flexgrow} color={color}>
+    <Label flexgrow={flexgrow}>
       {text && <LabelText> {text} </LabelText>}
-      <Input type={type} placeholder={placeholder} defaultValue={ defaultValue} />
+      <Input {...rest} />
     </Label>
   )
 }
@@ -81,7 +80,7 @@ export const AuthInput = styled.input.attrs(props => ({
   }
 `;
 
-export function AuthInputBox({ label, ...rest }) {
+export function AuthInputBox({ label, children, ...rest }) {
   return (
     <AuthInputWrapper>
       <AuthLabel>
