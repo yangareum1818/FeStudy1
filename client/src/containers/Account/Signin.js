@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import DefaultButton, { GoogleBtn, WhiteSmokeButton } from '../../components/Button';
-import CheckBox from '../../components/CheckBox';
-import { AuthInputBox } from '../../components/Input';
-import AccountPageLayout from '../../Layout/AccountPageLayout';
+import React from "react";
+import styled from "styled-components";
+import DefaultButton, { GoogleBtn, SnsButton } from "../../components/Button";
+import CheckBox from "../../components/CheckBox";
+import { AuthInputBox } from "../../components/Input";
+import AccountPageLayout from "../../Layout/AccountPageLayout";
 
 const SignInDivider = styled.hr`
   height: 0.1rem;
@@ -24,19 +24,21 @@ const SignInDivider = styled.hr`
 
 const FormBox = styled.form``;
 
-
 function SignIn() {
   const handleClickGoogleLogin = () => {
     window.location.href = `http://localhost:8000/auth/google/login?redirect_url=${window.location}`;
-  }
+  };
 
   const SignupLink = () => {
     window.location.href = `/account/signup`;
-  }
+  };
 
   return (
     <AccountPageLayout>
-      <GoogleBtn onClick={handleClickGoogleLogin} text={"구글로 1초 만에 시작하기"} />
+      <GoogleBtn
+        onClick={handleClickGoogleLogin}
+        text={"구글로 1초 만에 시작하기"}
+      />
 
       <SignInDivider />
 
@@ -45,10 +47,15 @@ function SignIn() {
         <AuthInputBox type={"password"} label={"비밀번호"} />
         <CheckBox text={"자동 로그인"} />
         <DefaultButton text={"로그인"} />
-        <WhiteSmokeButton onClick={SignupLink} type={"button"} text={"이메일로 회원가입"} MTop={"1.6rem"} />
+        <SnsButton
+          onClick={SignupLink}
+          type={"button"}
+          text={"이메일로 회원가입"}
+          MTop={"1.6rem"}
+        />
       </FormBox>
     </AccountPageLayout>
-  )
+  );
 }
 
-export default SignIn
+export default SignIn;
