@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactComponent as EmptySVG } from '../../images/empty.svg';
+import { ReactComponent as EmptySVG } from "../../images/empty.svg";
 
 const EmptyBlock = styled.div`
   @media (min-width: 960px) {
@@ -14,7 +14,7 @@ const EmptyBlock = styled.div`
   .empty-item {
     height: 13.2rem;
 
-    #empty-item__clip-{
+    #empty-item__clip- {
     }
     .empty-item__clip-01 {
       animation: falling-01 2s ease-in-out forwards;
@@ -68,7 +68,7 @@ function Empty({ text, children }) {
       <EmptySVG />
       <EmptyText>{text}</EmptyText>
     </EmptyBlock>
-  )
+  );
 }
 
-export default Empty
+export default Empty;

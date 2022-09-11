@@ -17,7 +17,7 @@ function Shortbook() {
         <Empty text={"도서 목록이 존재하지 않습니다."} />
       </ShortbookListBlock>
     </CommonPageLayout>
-  )
+  );
 }
 
-export default Shortbook
+export default Shortbook;
