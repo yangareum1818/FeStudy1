@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import useUserInfo from "../../hooks/useUserInfo";
-// import useUserInfoChange from "../../hooks/useUserInfoChange";
+import useUserInfoChange from "../../hooks/useUserInfoChange";
 import { rem } from "../../constants/style";
 import DefaultButton, { Button } from "../../components/Button";
 import InputBox from "../../components/Input";
 import CheckBox from "../../components/CheckBox";
 import CommonPageLayout from "../../Layout/CommonPageLayout";
-import { useState } from "react";
 import axios from "axios";
 
 // Strong Line
@@ -119,26 +118,18 @@ const DeleteBtn = styled.a`
 
 function Information() {
   const userInfo = useUserInfo();
-
-  // 밑에 newinfo지우고, useUserInfoChange에서 받아온 state가져와서 다시 작업.
-  // const userInfoChange = useUserInfoChange();
-  // console.log(userInfoChange);
-
-  const [newinfo, setNewInfo] = useState({
-    id: "",
-    name: "",
-    email: "",
-    phone: "",
-  });
+  const userInfoChange = useUserInfoChange();
+  console.log(userInfoChange);
 
   const sendUserInfo = (e) => {
     e.preventDefault();
     axios
-      .patch("http://localhost:8000/api/v1/user/my", newinfo, {
+      .patch("http://localhost:8000/api/v1/user/my", userInfoChange.newinfo, {
         withCredentials: true,
       })
-      .then((req) => {
-        setNewInfo(req.data);
+      .then((res) => {
+        userInfoChange.setNewInfo(res.data);
+        userInfoChange.setLoading(false);
         alert("수정이 완료되었습니다.");
       })
       .catch((err) => {
@@ -148,16 +139,17 @@ function Information() {
       });
   };
 
-  const onChange = (e) => {
-    setNewInfo({
+  const InfoChange = (e) => {
+    userInfoChange.setNewInfo({
       ...userInfo.info,
       [e.target.name]: e.target.value,
     });
   };
 
   if (userInfo.loading) {
-    return <div> loading... </div>;
+    return <div> userinfo loading... </div>;
   }
+
   return (
     <CommonPageLayout>
       <FormWrapper>
@@ -171,7 +163,7 @@ function Information() {
                   text={"이름"}
                   flexgrow={".1"}
                   name={"name"}
-                  onChange={onChange}
+                  onChange={InfoChange}
                   defaultValue={userInfo.info.name}
                 />
                 <Button text={"변경"} />
@@ -183,7 +175,7 @@ function Information() {
                   text={"이메일"}
                   flexgrow={".5"}
                   name={"email"}
-                  onChange={onChange}
+                  onChange={InfoChange}
                   defaultValue={userInfo.info.email}
                 />
                 <Button text={"변경"} />
@@ -195,7 +187,7 @@ function Information() {
                   text={"휴대전화"}
                   flexgrow={".5"}
                   name={"phone"}
-                  onChange={onChange}
+                  onChange={InfoChange}
                   defaultValue={userInfo.info.phone}
                 />
                 <Button text={"변경"} />
