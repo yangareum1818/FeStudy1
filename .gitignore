@@ -3,3 +3,12 @@ dist
 db_data
 /.env
 .envrc
+
+# gitignore settings for yarn version berry
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

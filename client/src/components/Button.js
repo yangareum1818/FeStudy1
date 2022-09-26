@@ -68,7 +68,7 @@ export default function DefaultButton({
   ...rest
 }) {
   return (
-    <BtnGroup {...rest}>
+    <BtnGroup>
       <DefaultBtn touch {...rest}>
         {text}
       </DefaultBtn>
