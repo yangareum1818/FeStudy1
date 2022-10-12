@@ -11,6 +11,7 @@ export default function useUserInfoChange() {
     organization: "",
     company: "",
   });
+
   const [loading, setLoading] = useState(true);
 
   return {

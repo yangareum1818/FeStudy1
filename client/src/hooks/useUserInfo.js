@@ -16,8 +16,6 @@ export default function useUserInfo() {
       )
       .then((res) => {
         setUserInfo(res.data);
-        console.log(res.data);
-
         setLoading(false);
       });
   }, []);

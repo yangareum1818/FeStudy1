@@ -119,18 +119,17 @@ const DeleteBtn = styled.a`
 function Information() {
   const userInfo = useUserInfo();
   const userInfoChange = useUserInfoChange();
-  console.log(userInfoChange);
+  // console.log(userInfoChange);
 
-  const sendUserInfo = (e) => {
-    e.preventDefault();
+  const sendUserInfo = () => {
     axios
       .patch("http://localhost:8000/api/v1/user/my", userInfoChange.newinfo, {
         withCredentials: true,
       })
       .then((res) => {
+        alert("수정이 완료되었습니다.");
         userInfoChange.setNewInfo(res.data);
         userInfoChange.setLoading(false);
-        alert("수정이 완료되었습니다.");
       })
       .catch((err) => {
         alert(
@@ -144,6 +143,8 @@ function Information() {
       ...userInfo.info,
       [e.target.name]: e.target.value,
     });
+
+    console.log(e.target.value);
   };
 
   if (userInfo.loading) {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import CourseItem from "./CourseItem"
-import TabPanel from "../Common/TabPanel"
+import CourseItem from "./CourseItem";
+import TabPanel from "../Common/TabPanel";
 import useCourseList from "../../hooks/useCourseList";
 import CommonPageLayout from "../../Layout/CommonPageLayout";
 import Title from "../Common/Title";
@@ -12,8 +12,9 @@ const CouresListBlock = styled.div`
 function Course() {
   const course = useCourseList();
 
+  console.log(course);
   if (course.isError) {
-    return <div> Error! </div>
+    return <div> Error! </div>;
   }
 
   return (
@@ -21,13 +22,16 @@ function Course() {
       <Title text={"내 강의 보기"} />
       <TabPanel></TabPanel>
       <CouresListBlock>
-        {(!course.loading && course.mycourse) ? course.mycourse.map((article) => (
-          <CourseItem article={article} />
-        )) : (<div> Loading.. </div>)}
+        {!course.loading && course.mycourse ? (
+          course.mycourse.map((article, id) => (
+            <CourseItem key={id} article={article} />
+          ))
+        ) : (
+          <div> Loading.. </div>
+        )}
       </CouresListBlock>
     </CommonPageLayout>
   );
-  
 }
 
-export default Course
+export default Course;

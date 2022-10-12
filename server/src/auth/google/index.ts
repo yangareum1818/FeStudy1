@@ -32,6 +32,7 @@ googleAuthRouter.get(
    */
   "/login/callback",
   passport.authenticate("google", {
+    successRedirect: "http://localhost:3000",
     failureRedirect: "/auth/google/login/fail",
   }),
   function (req, res, next) {

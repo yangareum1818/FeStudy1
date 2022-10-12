@@ -26,6 +26,11 @@ const FormBox = styled.form``;
 
 function SignIn() {
   const handleClickGoogleLogin = () => {
+    // const href = window.location.href;
+    // let params = new URL(
+    //   `http://localhost:8000/auth/google/login?redirect_url=${window.location}`
+    // );
+
     window.location.href = `http://localhost:8000/auth/google/login?redirect_url=${window.location}`;
   };
 

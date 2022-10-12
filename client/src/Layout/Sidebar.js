@@ -124,15 +124,14 @@ function SideBar() {
       </NameSidebar>
       <AvailableSidebarSub>
         사용 가능 쿠폰&nbsp;
-        <SidebarCouponCount href="/coupon-list">
+        <SidebarCouponCount href="/coupon">
           {couponcount.loading ? "Loading!" : couponcount.mycoupon.length}
         </SidebarCouponCount>
       </AvailableSidebarSub>
       <SidebarListWraaper>
         {navList.map((item) => (
-          <SidebarList>
+          <SidebarList key={item.name}>
             <SidebarLink
-              key={item.name}
               className={({ isActive }) => (isActive ? "active" : "")}
               to={item.path}
             >
