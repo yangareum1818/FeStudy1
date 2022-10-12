@@ -147,9 +147,7 @@ function SignUp() {
                 value: true,
                 message: "비밀번호를 한번 더 입력해주세요.",
               },
-              validate: (value) => {
-                value === password.current;
-              },
+              validate: (value) => value === password.current,
             })}
           />
           {errors.passwordcheck && (
