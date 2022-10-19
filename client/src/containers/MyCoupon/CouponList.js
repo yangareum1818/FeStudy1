@@ -1,6 +1,8 @@
 import styled from "styled-components";
+
+import CommonPageLayout from "../../Layout/CommonPageLayout";
 import CouponItem from "./CouponItem";
-import CouponInputBar from "../Common/CouponInputBar"
+import CouponInputBar from "../Common/CouponInputBar";
 import useCouponList from "../../hooks/useCouponList";
 
 const CouponsListBlock = styled.div`
@@ -13,20 +15,25 @@ const CouponsListBlock = styled.div`
 
 function Coupon() {
   const couponlist = useCouponList();
-  console.log(couponlist);
-  if (couponlist.isError) { 
-    return <div> Error! </div>
+
+  if (couponlist.isError) {
+    return <div> Error! </div>;
   }
+
   return (
-    <>
+    <CommonPageLayout>
       <CouponInputBar />
       <CouponsListBlock>
-        {(!couponlist.loading && couponlist.mycoupon && !couponlist.isError) ? couponlist.mycoupon.map((coupon) => (
-          <CouponItem article={coupon} />
-        )) : (<div>Loaing...</div>)}
+        {!couponlist.loading && couponlist.mycoupon ? (
+          couponlist.mycoupon.map((coupon, id) => (
+            <CouponItem key={id} coupon={coupon} />
+          ))
+        ) : (
+          <div>Loaing...</div>
+        )}
       </CouponsListBlock>
-    </>
+    </CommonPageLayout>
   );
 }
 
-export default Coupon
+export default Coupon;

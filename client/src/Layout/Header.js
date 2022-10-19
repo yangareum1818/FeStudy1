@@ -8,16 +8,19 @@ const Head = styled.header`
   height: 12rem;
   font-size: 3.2rem;
   font-weight: 700;
-  border-bottom: .1rem solid #eee;
+  border-bottom: 0.1rem solid #eee;
 `;
 
-function Header() {
+function Header({ children }) {
   return (
     <Head>
       HEADER
-      <a href={`http://localhost:8000/auth/google/login?redirect_url=${window.location}`}> Login </a>
+      <a href="/account/signin">
+        로그인
+        {children}
+      </a>
     </Head>
   );
 }
 
-export default Header
+export default Header;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
-import useCouponList from '../hooks/useCouponList';
-import useUserName from '../hooks/useUserName';
+import useCouponList from "../hooks/useCouponList";
+import useUserInfo from "../hooks/useUserInfo";
 
 const SidebarWrapper = styled.nav`
   @media (min-width: 960px) {
@@ -23,7 +23,7 @@ const NameSidebar = styled.h3`
 `;
 
 const AvailableSidebarSub = styled.p`
-  margin-top: .8rem;
+  margin-top: 0.8rem;
   font-size: 1.4rem;
   color: #424242;
 `;
@@ -35,101 +35,113 @@ const SidebarCouponCount = styled.a`
   text-decoration: underline;
 `;
 
-const NavListWraaper = styled.ul`
+const SidebarListWraaper = styled.ul`
   margin-top: 3.4rem;
   font-size: 1.6rem;
-  border-top: .1rem solid #e6e8eb;
+  border-top: 0.1rem solid #e6e8eb;
+`;
 
-  .list_item {
-    display: block;
-    padding: 2rem 0 1.9rem;
-    color: #282828;
-    border-bottom: .1rem solid #e6e8eb;
-    transition: all .3s ease-out;
-    cursor: pointer;
+const SidebarList = styled.li`
+  padding: 2rem 0 1.9rem;
+  border-bottom: 0.1rem solid #e6e8eb;
+`;
 
-    &.active {
-      font-weight: bold;
-    }
+const SidebarLink = styled(NavLink)`
+  display: block;
+  color: #282828;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
 
-    &:hover, &:focus {
-      color: #ed234b;
-    }
+  &.active {
+    font-weight: bold;
+  }
+
+  &:hover,
+  &:focus {
+    color: #ed234b;
   }
 `;
 
 const navList = [
   {
-    path: '/',
-    name: '내 강의 보기',
-    value: 'all'
+    path: "/",
+    name: "내 강의 보기",
+    value: "course-list",
   },
   {
-    path: 'https://www.daum.net',
-    name: '내 숏북 보기',
-    value: 'shortbook'
+    path: "/shortbook",
+    name: "내 숏북 보기",
+    value: "shortbook",
   },
   {
-    path: 'https://www.daum.net',
-    name: '수강 신청 내역',
-    value: 'enrollment'
+    path: "/enrolment",
+    name: "수강 신청 내역",
+    value: "enrolment",
   },
   {
-    path: 'https://www.daum.net',
-    name: '거래 내역',
-    value: 'deal'
+    path: "https://www.daum.net",
+    name: "거래 내역",
+    value: "deal",
   },
   {
-    path: '/coupon-list',
-    name: '쿠폰 내역',
-    value: 'coupon'
+    path: "/coupon",
+    name: "쿠폰 내역",
+    value: "coupon-list",
   },
   {
-    path: '/information',
-    name: '회원 정보 수정',
-    value: 'profile'
+    path: "/information",
+    name: "회원 정보 수정",
+    value: "information",
   },
   {
-    path: 'https://www.daum.net',
-    name: '기기 관리',
-    value: 'device'
+    path: "https://www.daum.net",
+    name: "기기 관리",
+    value: "device",
   },
   {
-    path: 'https://www.daum.net',
-    name: '로그아웃',
-    value: 'logout'
-  }
+    path: "https://www.daum.net",
+    name: "로그아웃",
+    value: "logout",
+  },
 ];
 
 function SideBar() {
-  const username = useUserName();
+  const userInfo = useUserInfo();
   const couponcount = useCouponList();
 
-  if (username.isError) {
-    return <div> Error! </div>
+  if (userInfo.isError) {
+    return <div> Error! </div>;
   }
 
   return (
     <SidebarWrapper>
-        <NameSidebar>안녕하세요, { (!username.loading && ! username.isError) ? username.userName : 'Loading..'}님!</NameSidebar>
-        <AvailableSidebarSub>사용 가능 쿠폰&nbsp;
-          <SidebarCouponCount href='/coupon-list'>{ couponcount.loading ? 'Loading!' : couponcount.mycoupon.length }</SidebarCouponCount>
-        </AvailableSidebarSub>
-        <NavListWraaper className='navlist_wrapper'>
-          {navList.map((item, index) => (
-            <li>
-              <NavLink
-                key={ index}
-                className={({ isActive }) => isActive ? "list_item active" : "list_item"}
-                to={item.path}
-              >
-                {item.name}
-              </NavLink>
-            </li>
-          ))}
-        </NavListWraaper>
+      <NameSidebar>
+        안녕하세요,{" "}
+        {!userInfo.loading && !userInfo.isError
+          ? userInfo.info.name
+          : "Loading.."}
+        님!
+      </NameSidebar>
+      <AvailableSidebarSub>
+        사용 가능 쿠폰&nbsp;
+        <SidebarCouponCount href="/coupon">
+          {couponcount.loading ? "Loading!" : couponcount.mycoupon.length}
+        </SidebarCouponCount>
+      </AvailableSidebarSub>
+      <SidebarListWraaper>
+        {navList.map((item) => (
+          <SidebarList key={item.name}>
+            <SidebarLink
+              className={({ isActive }) => (isActive ? "active" : "")}
+              to={item.path}
+            >
+              {item.name}
+            </SidebarLink>
+          </SidebarList>
+        ))}
+      </SidebarListWraaper>
     </SidebarWrapper>
   );
 }
 
-export default SideBar
+export default SideBar;
